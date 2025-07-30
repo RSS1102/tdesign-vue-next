@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE">
     <img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License">
-  </a>
+  </a>1
   <a href="https://www.npmjs.com/package/tdesign-vue-next">
     <img src="https://img.shields.io/npm/v/tdesign-vue-next.svg?sanitize=true" alt="Version">
   </a>
