@@ -1,5 +1,8 @@
 <template>
-  <div class="tdesign-demo-block-column" style="width: 100%; max-width: 800px">
+  <!-- Bug demo: https://github.com/Tencent/tdesign-vue-next/issues/6037 -->
+  <!-- row-class-name 给第一行加 highlighted-row，非 scoped CSS，容器 max-width: 400px -->
+  <!-- 横向滚动第一行，中间列文案会叠在左右固定列上 -->
+  <div class="tdesign-demo-block-column" style="width: 100%; max-width: 400px">
     <div>
       <t-radio-group v-model="leftFixedColumn" variant="default-filled">
         <t-radio-button :value="1"> 左侧固定一列 </t-radio-button>
@@ -28,6 +31,7 @@
       row-key="index"
       :data="emptyData ? [] : data"
       :columns="columns"
+      :row-class-name="rowClassName"
       :table-layout="tableLayout"
       :table-content-width="tableLayout === 'fixed' ? undefined : '1200px'"
       bordered
@@ -137,12 +141,20 @@ const scrollToCreateTime = () => {
   tableRef.value.scrollColumnIntoView('matters');
 };
 
+const rowClassName = ({ rowIndex }) => {
+  return rowIndex === 0 ? 'highlighted-row' : '';
+};
+
 const rehandleClickOp = (context: TableRowData) => {
   console.log(context);
 };
 </script>
-<style lang="less" scoped>
+<!-- 注意: scoped :deep() 会导致样式不生效从而无法复现 bug，必须使用非 scoped CSS -->
+<style lang="less">
 .tdesign-demo-block-column {
   width: 100%;
+}
+.t-table .highlighted-row > td {
+  background-color: rgba(59, 130, 246, 0.15);
 }
 </style>
